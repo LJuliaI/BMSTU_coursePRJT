@@ -1,7 +1,15 @@
-<% provide(:title, "Home") %>
-<h1>Sample App</h1>
-<p>
-  This is the home page for the
-  <a href="http://www.railstutorial.org/">Ruby on Rails Tutorial</a>
-  sample application.
-</p>
+<div class="center jumbotron">
+  <%= link_to image_tag("bmstu-emblem.png", alt: "Rails logo"),
+              'https://students.bmstu.ru' %>
+              
+  <h1>
+
+Добро пожаловать</h1>
+
+  <h2>
+    Мы поможем тебе не заблудиться в <a href="https://bmstu.ru"> МГТУ им. Н. Э. Баумана</a>!
+
+  </h2>
+
+  <%= link_to "Try it now!", '#', class: "btn btn-lg btn-primary" %>
+</div>

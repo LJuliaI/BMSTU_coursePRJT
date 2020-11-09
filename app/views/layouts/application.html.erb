@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
   <head>
+    <meta charset="UTF-8">
     <title><%= full_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,7 +12,10 @@
       <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
       </script>
     <![endif]-->
-
+    <meta name="description" content="">
+    <meta name="keywords" content=" ">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <%= javascript_pack_tag 'map_test', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
@@ -19,7 +23,7 @@
     <div class="container">
       <%= yield %>
       <%= render 'layouts/footer' %>
-      
+
     </div>
   </body>
 </html>

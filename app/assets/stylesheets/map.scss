@@ -23,31 +23,32 @@ svg {
 
 .part:hover {
 	transition: opacity .2s ease;
-	opacity: .5;
+	opacity: .66;
 	cursor: pointer;
 }
 
-.descript {
+.description {
 	display: none;
 	position: absolute;
 	padding: 20px;
 	box-sizing: border-box;
-	width: 300px;
-	height: 400px;
-	box-shadow: 0 0 32px 10px #ccc;
-	left: 50px;
-	bottom: calc(50% - 200px);
+	width: 400px;
+	height: 175px;
+	box-shadow: 0 0 32px 10px #9fb3c7d8;
+	left: 370px;
+	background-color: #82befa;
+	opacity: 0.8;
+	bottom: calc(50% - 300px);
 	font-family: sans-serif;
 }
 
-.descript img {
-	width: 250px;
+.description img {
+	width: 150px;
 	margin-bottom: 20px;
 }
 .jumbotron{
   height: 550px;
 }
 img {
-  width: 955px;
-
+  width: 900px;
 }

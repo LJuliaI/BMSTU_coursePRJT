@@ -1,9 +1,11 @@
 $('.part').hover (
 	function() {
-		$('.bxt').html($(this).attr('bxt-data'));
-		$('.descript').fadeIn();
+		console.log(this);
+		$('.description').html($(this).attr('description-data'));
+		$('.description').fadeIn();
+
 	},
 	function() {
-		$('.bxt').fadeOut(50);
+		$('.description').fadeOut(50);
 	}
 )

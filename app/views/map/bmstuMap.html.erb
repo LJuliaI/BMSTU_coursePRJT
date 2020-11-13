@@ -1,25 +1,17 @@
-
 <div class="map">
   <svg viewBox="0 0 1382.6667 974.66669">
 
-      < for ($n = 1; $n < 3; $n++)
-{
-  <path class="part" d= "<%= Room.find($n).coord %>"
-  fill="#82befa" description-data = " <%= Room.find($n).name %> "/>
- }
- />
+    <% @rooms.each do |item|%>
+    <path class="part" d= "<%= item.coord%>"
+         fill="#82befa" description-data = "<%=item.name%>" />
+<% end %>
 
 
 
-
-
-
-
-      <path class="part" d="m 136.58594,587.45217 v 35.80408 l 66.30386,1.32608 v -35.80409 z"
-       fill="#82befa" description-data = " Кафе «Чайная пара» "/>
-
-      <path class="part" d="m 413.73606,449.54015 v 45.08662 l 82.21678,-1.32608 v -42.43447 z"
+  <!--     <path class="part" d="m 413.73606,449.54015 v 45.08662 l 82.21678,-1.32608 v -42.43447 z"
       fill="#82befa" description-data = " "/>
+        <path class="part" d="m 136.58594,587.45217 v 35.80408 l 66.30386,1.32608 v -35.80409 z"
+           fill="#82befa" description-data = " Кафе «Чайная пара» "/>
 
       <path class="part" d="m 123.32517,552.97416 291.73697,1.32608 -1.32608,-59.67347 h -55.69524 v -29.1737 H 153.82495 l -1.32608,31.82585 h -29.1737 z"
       fill="#82befa" description-data = " Столовая «Студенческая» "/>
@@ -73,6 +65,7 @@
 
 
 <path class="part" d="m 29.065944,301.77289 h 29.920825 v 64.11605 l -29.493384,0.42744 z"fill="#82befa" description-data = " Дом Физики Лаб. 249 "/>
+-->
     </svg>
 
     <div class="description"/>

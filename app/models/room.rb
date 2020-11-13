@@ -1,5 +1,6 @@
 class Room < ApplicationRecord
-  def
-    
+
+  def self.selectroomsbyfloor (etaz)
+    self.where("floor = ?", etaz)
   end
 end

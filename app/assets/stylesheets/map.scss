@@ -23,11 +23,13 @@ svg {
 
 .part:hover {
 	transition: opacity .2s ease;
+
 	opacity: .66;
 	cursor: pointer;
 }
 
 .description {
+
 	display: none;
 	position: absolute;
 	padding: 20px;
@@ -51,4 +53,5 @@ svg {
 }
 img {
   width: 900px;
+
 }

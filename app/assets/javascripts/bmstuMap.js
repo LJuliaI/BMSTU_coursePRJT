@@ -1,11 +1,13 @@
 $('.part').hover (
+
 	function() {
 		console.log(this);
 		$('.description').html($(this).attr('description-data'));
-		$('.description').fadeIn();
+		$('.description').fadeIn(5);
 
 	},
 	function() {
-		$('.description').fadeOut(50);
+		$('.description').fadeOut(5);
 	}
+
 )

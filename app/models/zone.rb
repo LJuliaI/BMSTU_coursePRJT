@@ -22,11 +22,15 @@ class Zone < ApplicationRecord
       current.visited = true
       current = @zones.select{|zone| zone.visited == false}.sort_by{|zone| zone.mark}[0]
     end
-#    finalez  = []
-#    while (not (current == head))
-  #    finalez << current
-
-#    end
+    finalez  = []
+    current = tail
+    finalez << tail
+    while (not (current == head))
+      neigbs = initneighbours(current)
+      current = neigbs.detect {|neig| neig.mark == current.mark-1 }
+      finalez << current
+    end
+    return finalez
   end
 
   def self.resetzones

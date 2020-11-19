@@ -1,5 +1,5 @@
 <div class="map">
-  <svg viewBox="0 0 1382.6667 974.66669">
+  <svg viewBox="<%= @viewbox %>" >
 
     <% @rooms.each do |item|%>
     <path class="part" d= "<%= item.coord%>"
@@ -12,11 +12,14 @@
     <div class="description"/>
 
     </div>
+
     <div class="container1">
       <img src="/images/bmstu0floor.jpg" alt="" class="wrap1-img1">
       <img src="/images/bmstu1+floor.jpg" alt="" class="wrap1-img2">
       <img src="/images/bmstu2floor.jpg" alt="" class="wrap1-img3">
-
+<img src="/images/bmstu3floor.jpg" alt="" class="wrap1-img4">
+<img src="/images/bmstu4floor.jpg" alt="" class="wrap1-img5">
+<img src="/images/bmstu5floor.jpg" alt="" class="wrap1-img6">
     </div>
 <%= javascript_include_tag 'bmstuMap' %>
 
@@ -25,4 +28,7 @@
   <button class="wrap1-btn1">0 Floor</button>
   <button class="wrap1-btn2">1 Floor</button>
   <button class="wrap1-btn3">2 Floor</button>
+    <button class="wrap1-btn4">3 Floor</button>
+    <button class="wrap1-btn5">4 Floor</button>
+    <button class="wrap1-btn6">5 Floor</button>
 </div>

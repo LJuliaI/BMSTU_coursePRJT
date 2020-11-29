@@ -1,15 +1,28 @@
-
-
 $( document ).ready(function () {
 floor (2);
-
-$('.wrap1-btn3').click(function () {
+$('.wrap1-btn0').click(function () {
 	cleardata ("floor");
-	floor (3);
+	floor (0);
+});
+$('.wrap1-btn1').click(function () {
+	cleardata ("floor");
+	floor (1);
 });
 $('.wrap1-btn2').click(function () {
 	cleardata ("floor");
 	floor (2);
+});
+$('.wrap1-btn3').click(function () {
+	cleardata ("floor");
+	floor (3);
+});
+$('.wrap1-btn4').click(function () {
+	cleardata ("floor");
+	floor (4);
+});
+$('.wrap1-btn5').click(function () {
+	cleardata ("floor");
+	floor (5);
 });
 });
 function mouseinf(){
@@ -24,9 +37,7 @@ function cleardata(elementID){
 }
 
 function floor (etaz){
-	var frm = document.forms.change_floor;
 	var param_str = "?" +"etaz=" + etaz
-//	if (param_str == "") return false;
 	var my_JSON_object = {};
 	var link = location.protocol + "//" + location.host + "/map/getdata.json"
 	var http_request = new XMLHttpRequest();
@@ -59,12 +70,24 @@ function floor (etaz){
 		document.getElementById("floor").appendChild(newsvg);
 		var newimg = document.createElement("img");
 		switch (flor) {
+			case 0:
+				newimg.setAttribute('src', "/images/bmstu0floor.jpg");
+				break;
+			case 1:
+				newimg.setAttribute('src', "/images/bmstu1+floor.jpg");
+				break;
 			case 2:
-				newimg.setAttribute('src', "/images/bmstu2floorimg.jpg");
+				newimg.setAttribute('src', "/images/bmstu2floor.jpg");
 				break;
 			case 3:
 				newimg.setAttribute('src', "/images/bmstu3floor.jpg");
 				break;
+			case 4:
+					newimg.setAttribute('src', "/images/bmstu4floor.jpg");
+					break;
+			case 5:
+						newimg.setAttribute('src', "/images/bmstu5floor.jpg");
+						break;
 			 }
 		document.getElementById("floor").appendChild(newimg);
 	}

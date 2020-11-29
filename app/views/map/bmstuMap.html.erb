@@ -1,43 +1,33 @@
 <div class="map">
-  <svg viewBox="0 0 1382.6667 974.66669" class="svg-btn2">
-
+  <div id="floor" class="floor">
+    <svg viewBox="0 0 1382.6667 974.66669" class="svg-btn2">
     <% @rooms2.each do |item|%>
     <path class="part" d= "<%= item.coord%>"
          fill="#82befa" description-data = "<%=item.name%>" />
-<% end %>
-
-
+         <% end %>
     </svg>
-    <svg viewBox="0 0 1382.6667 974.66669" class="svg-btn3">
-
-      <% @rooms3.each do |item|%>
-      <path class="part" d= "<%= item.coord%>"
-           fill="#82befa" description-data = "<%=item.name%>" />
-  <% end %>
-
-
-      </svg>
-
+    <img src="/images/bmstu2floorimg.jpg" alt="2 floor" class="wrap1-img2">
+</div>
     <div class="description"/>
 
     </div>
 
-    <div class="container1">
+<!--    <div class="container1">
       <img src="/images/bmstu0floor.jpg" alt="0 floor" class="wrap1-img0">
       <img src="/images/bmstu1+floor.jpg" alt="1 floor" class="wrap1-img1">
       <img src="/images/bmstu2floorimg.jpg" alt="2 floor" class="wrap1-img2">
 <img src="/images/bmstu3floor.jpg" alt="3 floor" class="wrap1-img3">
 <img src="/images/bmstu4floor.jpg" alt="4 floor" class="wrap1-img4">
 <img src="/images/bmstu5floor.jpg" alt="5 floor" class="wrap1-img5">
-    </div>
+    </div>   -->
 <%= javascript_include_tag 'bmstuMap' %>
-
 </div>
 <div >
+
   <button class="wrap1-btn0">0 Floor</button>
   <button class="wrap1-btn1">1 Floor</button>
-  <button class="wrap1-btn2">2 Floor</button>
-    <button class="wrap1-btn3">3 Floor</button>
+    <input name="Floor3" type="submit" value="3" class="wrap1-btn3" />
+    <input name="Floor2" type="submit" value="2" class="wrap1-btn2" />
     <button class="wrap1-btn4">4 Floor</button>
     <button class="wrap1-btn5">5 Floor</button>
 </div>

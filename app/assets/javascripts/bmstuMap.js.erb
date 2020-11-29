@@ -1,51 +1,11 @@
 
 
 $( document ).ready(function () {
-$('.wrap1-img0').hide();
-$('.wrap1-img1').hide();
-$('.wrap1-img3').hide();
-$('.wrap1-img4').hide();
-$('.wrap1-img5').hide();
-$('.svg-btn3').hide();
+floor (2);
 
-
-$('.wrap1-btn0').click(function () {
-	$('.wrap1-img1').hide();
-  $('.wrap1-img2').hide();
-	$('.wrap1-img3').hide();
-	$('.wrap1-img4').hide();
-	$('.wrap1-img5').hide();
-  $('.wrap1-img0').toggle(50);
-
-});
-$('.wrap1-btn1').click(function () {
-	$('.wrap1-img2').hide();
-  $('.wrap1-img3').hide();
-	$('.wrap1-img4').hide();
-	$('.wrap1-img5').hide();
-	$('.wrap1-img0').hide();
-  $('.wrap1-img1').toggle(50);
-});
 $('.wrap1-btn3').click(function () {
 	cleardata ("floor");
 	floor (3);
-});
-$('.wrap1-btn4').click(function () {
-	$('.wrap1-img1').hide();
-  $('.wrap1-img2').hide();
-	$('.wrap1-img3').hide();
-	$('.wrap1-img5').hide();
-	$('.wrap1-img6').hide();
-  $('.wrap1-img4').toggle(50);
-
-});
-$('.wrap1-btn5').click(function () {
-	$('.wrap1-img1').hide();
-  $('.wrap1-img2').hide();
-	$('.wrap1-img3').hide();
-	$('.wrap1-img4').hide();
-	$('.wrap1-img6').hide();
-  $('.wrap1-img5').toggle(50);
 });
 $('.wrap1-btn2').click(function () {
 	cleardata ("floor");
@@ -65,7 +25,7 @@ function cleardata(elementID){
 
 function floor (etaz){
 	var frm = document.forms.change_floor;
-	var param_str = "?" +"etaz=" + etaz // frm???
+	var param_str = "?" +"etaz=" + etaz
 //	if (param_str == "") return false;
 	var my_JSON_object = {};
 	var link = location.protocol + "//" + location.host + "/map/getdata.json"
@@ -97,28 +57,14 @@ function floor (etaz){
 			newsvg.appendChild(newpth);
 		});
 		document.getElementById("floor").appendChild(newsvg);
+		var newimg = document.createElement("img");
 		switch (flor) {
 			case 2:
-				var newimg = document.createElement("img");
 				newimg.setAttribute('src', "/images/bmstu2floorimg.jpg");
-				document.getElementById("floor").appendChild(newimg);
 				break;
 			case 3:
-				var newimg = document.createElement("img");
 				newimg.setAttribute('src', "/images/bmstu3floor.jpg");
-				document.getElementById("floor").appendChild(newimg);
 				break;
 			 }
+		document.getElementById("floor").appendChild(newimg);
 	}
-
-	$('.part').hover (
-		function() {
-
-			$('.description').html($(this).attr('description-data'));
-			$('.description').fadeIn(5);
-
-		},
-		function() {
-			$('.description').fadeOut(5);
-		}
-	)

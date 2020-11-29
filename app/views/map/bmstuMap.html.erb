@@ -1,20 +1,15 @@
 <div class="map">
-  <svg viewBox="0 0 1382.6667 974.66669">
-
-    <% @rooms.each do |item|%>
-    <path class="part" d= "<%= item.coord%>"
-         fill="#82befa" description-data = "<%=item.name%>" />
-<% end %>
-
-
-    </svg>
-
+  <div id="floor" class="floor">
+</div>
     <div class="description"/>
-
     </div>
-
 <%= javascript_include_tag 'bmstuMap' %>
-      <%= image_tag("bmstu2floor.jpg") %>
-
-
+</div>
+<div >
+    <input name="Floor0" type="submit" value="Floor 0" class="wrap1-btn0" />
+    <input name="Floor1" type="submit" value="Floor 1" class="wrap1-btn1" />
+    <input name="Floor2" type="submit" value="Floor 2" class="wrap1-btn2" />
+    <input name="Floor3" type="submit" value="Floor 3" class="wrap1-btn3" />
+    <input name="Floor4" type="submit" value="Floor 4" class="wrap1-btn4" />
+    <input name="Floor5" type="submit" value="Floor 5" class="wrap1-btn5" />
 </div>

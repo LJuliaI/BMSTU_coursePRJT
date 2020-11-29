@@ -1,0 +1,93 @@
+$( document ).ready(function () {
+floor (2);
+$('.wrap1-btn0').click(function () {
+	cleardata ("floor");
+	floor (0);
+});
+$('.wrap1-btn1').click(function () {
+	cleardata ("floor");
+	floor (1);
+});
+$('.wrap1-btn2').click(function () {
+	cleardata ("floor");
+	floor (2);
+});
+$('.wrap1-btn3').click(function () {
+	cleardata ("floor");
+	floor (3);
+});
+$('.wrap1-btn4').click(function () {
+	cleardata ("floor");
+	floor (4);
+});
+$('.wrap1-btn5').click(function () {
+	cleardata ("floor");
+	floor (5);
+});
+});
+function mouseinf(){
+		$('.description').html($(this).attr('description-data'));
+		$('.description').fadeIn(5);
+}
+function mouseoutf(){
+		$('.description').fadeOut(5);
+}
+function cleardata(elementID){
+	document.getElementById(elementID).innerHTML = "";
+}
+
+function floor (etaz){
+	var param_str = "?" +"etaz=" + etaz
+	var my_JSON_object = {};
+	var link = location.protocol + "//" + location.host + "/map/getdata.json"
+	var http_request = new XMLHttpRequest();
+	http_request.open("GET", link+param_str, true);
+	http_request.onreadystatechange = function () {
+		var done = 4, ok = 200;
+		if (http_request.readyState == done &&
+			http_request.status == ok) {
+				my_JSON_object = JSON.parse(http_request.responseText);
+				show_result(my_JSON_object, etaz);
+		}
+	};
+		http_request.send(null);
+		return false;
+	}
+	function show_result(data, flor){
+		var newsvg = document.createElementNS("http://www.w3.org/2000/svg","svg");
+		newsvg.className = "svg-btn2";
+		newsvg.setAttribute('viewBox', "0 0 1382.6667 974.66669");
+		data.forEach(function(rowData) {
+			var newpth = document.createElementNS("http://www.w3.org/2000/svg","path");
+			newpth.setAttribute('d', rowData["coord"]);
+			newpth.setAttribute('description-data', rowData["name"]);
+			newpth.setAttribute('fill', "#82befa");
+			newpth.setAttribute('class', "part");
+			newpth.addEventListener("mouseover", mouseinf);
+			newpth.addEventListener("mouseout", mouseoutf);
+			newsvg.appendChild(newpth);
+		});
+		document.getElementById("floor").appendChild(newsvg);
+		var newimg = document.createElement("img");
+		switch (flor) {
+			case 0:
+				newimg.setAttribute('src', "/images/bmstu0floor.jpg");
+				break;
+			case 1:
+				newimg.setAttribute('src', "/images/bmstu1+floor.jpg");
+				break;
+			case 2:
+				newimg.setAttribute('src', "/images/bmstu2floor.jpg");
+				break;
+			case 3:
+				newimg.setAttribute('src', "/images/bmstu3floor.jpg");
+				break;
+			case 4:
+					newimg.setAttribute('src', "/images/bmstu4floor.jpg");
+					break;
+			case 5:
+						newimg.setAttribute('src', "/images/bmstu5floor.jpg");
+						break;
+			 }
+		document.getElementById("floor").appendChild(newimg);
+	}

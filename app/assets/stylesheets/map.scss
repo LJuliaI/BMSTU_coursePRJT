@@ -16,7 +16,12 @@ svg {
 	height: 100%;
 	width: 100%;
 }
-
+a{
+	color: #fff;
+}
+link {
+	color: #fff;
+}
 .part {
 	opacity: .3;
 }
@@ -43,13 +48,19 @@ svg {
 	bottom: calc(50% - 300px);
 	font-family: sans-serif;
 }
-
+label{
+	color: #297dccfb;
+}
+form{
+	position: relative;
+}
 .description img {
 	width: 150px;
 	margin-bottom: 20px;
 }
 .jumbotron{
-  height: 550px;
+  height: 170px;
+
 }
 .map img {
   width: 900px;

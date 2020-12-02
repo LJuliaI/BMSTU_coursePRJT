@@ -12,9 +12,11 @@ class Room < ApplicationRecord
 
   #    def to_json(*options)
   #        as_json(*options).to_json(*options)
-  #    end   
+  #    end
   def self.selectroomsbyfloor (etazg)
     self.where("floor = ?", etazg)
   end
-
+  def self.alphabetical
+      self.all.order(:name)
+    end
 end

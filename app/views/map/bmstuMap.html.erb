@@ -5,6 +5,7 @@
     </div>
 <%= javascript_include_tag 'bmstuMap' %>
 </div>
+
 <div >
     <input name="Floor0" type="submit" value="Floor 0" class="wrap1-btn0" />
     <input name="Floor1" type="submit" value="Floor 1" class="wrap1-btn1" />
@@ -13,3 +14,44 @@
     <input name="Floor4" type="submit" value="Floor 4" class="wrap1-btn4" />
     <input name="Floor5" type="submit" value="Floor 5" class="wrap1-btn5" />
 </div>
+<div>
+  <div class= jumbotron>
+  <form action="/map" method="GET">
+    <input type="text" name="search_name" >
+    <input type="submit" value="Search for Room">
+   </form>
+   <br>
+
+   <form action="/map" method="GET">
+     <label for="filter">Filter Options</label>
+     <select id="filter" name="filter" onchange="this.form.submit()">
+       <option value="">Pick a Room</option>
+       <option value="floor" <%= "selected" if session[:filter] == "Floor" %>>Rooms by floor</option>
+<option value="room" <%= "selected" if session[:filter] == "Room" %>>All Rooms</option>
+     </select>
+     <% if session[:filter] == "floor" %>
+       <select name="filter_option" onchange="this.form.submit()">
+         <option value="Floor 0">Floor 0</option>
+         <option value="Floor 1">Floor 1</option>
+         <option value="Floor 2">Floor 2</option>
+         <option value="Floor 3">Floor 3</option>
+         <option value="Floor 4">Floor 4</option>
+         <option value="Floor 0">Floor 5</option>
+       </select>
+     <% elsif session[:filter] == "Room" %>
+       <select name="filter_option" onchange="this.form.submit()">
+         <option value="">Rooms</option>
+         <% @rooms.each do |room| %>
+           <h2>
+             <%= room.name %>
+           </h2>
+
+         <% end %>
+       </select>
+     <% end %>
+   </form>
+<a>
+  <%= link_to "Clear Filter Options", map_path %>
+</a>
+</div>
+  </div>

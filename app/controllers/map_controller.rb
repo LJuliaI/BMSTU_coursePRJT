@@ -1,7 +1,7 @@
 class MapController < ApplicationController
 
   def bmstuMap
-   puts (Zone.routesearch(2,3))
+   Zone.routesearch(9,20).each{|zone| puts (zone.id)}
   end
   def  getdata()
     @rooms =  Room.selectroomsbyfloor(params["etaz"].to_i).as_json

@@ -16,6 +16,14 @@ before_action :initialize_search
     handle_search_name
     handle_filters
   end
+  def index
+    # Use cookie to store filter and search data until user clears it
+    handle_search_name
+    handle_filters
+  end
+  def show
+    @rooms = Room.find(params[:id])
+  end
   def initialize_search
     @rooms = Room.alphabetical
     session[:search_name] ||= params[:search_name]
@@ -27,17 +35,17 @@ before_action :initialize_search
   def handle_search_name
     if session[:search_name]
       @rooms = Room.where("name LIKE ?", "%#{session[:search_name].titleize}%")
-      @zones = @zones.where(code: @rooms.pluck(:team))
+      #@zones = @zones.where(code: @rooms.pluck(:team))
     else
       @rooms = Room.all
     end
   end
   def handle_filters
-    if session[:filter_option] && session[:filter] == "position"
+    if session[:filter_option] && session[:filter] == "floor"
       @rooms = @rooms.where(position: session[:filter_option])
-      @zones = @zones.where(code: @rooms.pluck(:team))
-    elsif session[:filter_option] && session[:filter] == "team"
-      @zones = @zones.where(code: session[:filter_option])
+      #@zones = @zones.where(code: @rooms.pluck(:team))
+    elsif session[:filter_option] && session[:filter] == "room"
+      #@zones = @zones.where(code: session[:filter_option])
     end
   end
   def clear

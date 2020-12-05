@@ -54,4 +54,13 @@
   <%= link_to "Clear Filter Options", map_path %>
 </a>
 </div>
+
+    <% @rooms.each do |room| %>
+
+        <%= link_to "#{room.name} | ", map_path %>
+
+    <% end %>
+
+
+
   </div>

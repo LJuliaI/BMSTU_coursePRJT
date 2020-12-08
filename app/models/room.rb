@@ -19,4 +19,7 @@ class Room < ApplicationRecord
   def self.alphabetical
       self.all.order(:name)
     end
+    def self.allzone (zone)
+      self.where("zone = ?", zone)
+    end
 end

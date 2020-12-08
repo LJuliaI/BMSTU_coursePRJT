@@ -19,16 +19,13 @@
   <form action="/map" method="GET">
     <input type="text" name="search_name" >
     <input type="submit" value="Search for Room">
+    <input type="submit" value="Route">
    </form>
    <br>
 
    <form action="/map" method="GET">
      <label for="filter">Filter Options</label>
-     <select id="filter" name="filter" onchange="this.form.submit()">
-       <option value="">Pick a Room</option>
-       <option value="floor" <%= "selected" if session[:filter] == "Floor" %>>Rooms by floor</option>
-<option value="room" <%= "selected" if session[:filter] == "Room" %>>All Rooms</option>
-     </select>
+  
      <% if session[:filter] == "floor" %>
        <select name="filter_option" onchange="this.form.submit()">
          <option value="Floor 0">Floor 0</option>
@@ -55,11 +52,17 @@
 </a>
 </div>
 
-    <% @rooms.each do |room| %>
+<% for i in 1..10 %>
+<ul>
+<% @rooms.allzone(i).each do |rom| %>
 
-        <%= link_to "#{room.name} | ", map_path %>
-
+  <%= link_to " Зона #{rom.zone} |||| ", map_path %>
+  </ul>
+<% if rom.floor = "2" %>
+        <%= link_to " Аудитория #{rom.name} | ", map_path %>
+<% end %>
     <% end %>
+<% end %>
 
 
 

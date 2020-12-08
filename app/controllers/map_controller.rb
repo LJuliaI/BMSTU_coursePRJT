@@ -11,6 +11,10 @@ before_action :initialize_search
         end
       end
   end
+
+
+
+
   def index
     initialize_search
     handle_search_name

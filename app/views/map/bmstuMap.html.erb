@@ -1,7 +1,27 @@
+<div class="container2">
+      <div class="select-box">
+        <div class="options-container">
+        <% @allrooms.each do |i| %>
+        <div class="option">
+          <input type="radio" class="radio" id="<%=i.id%>" name="category" />
+          <label><%=i.name%></label>
+        </div>
+        <% end %>
+        </div>
+        <div class="selected">
+          Поиск аудитории
+        </div>
+        <input type="hidden" value="" class="selected-input"/>
+        <div class="search-box">
+          <input type="text" placeholder="Начните вводить номер..." />
+        </div>
+      </div>
+      <input name="Поиск" type="submit" value="Search" class="wrap1-btn6" />
+  </div>
 <div class="map">
   <div id="floor" class="floor">
 </div>
-    <div class="description"/>
+    <div class="description">
     </div>
 <%= javascript_include_tag 'bmstuMap' %>
 </div>
@@ -13,3 +33,48 @@
     <input name="Floor4" type="submit" value="Floor 4" class="wrap1-btn4" />
     <input name="Floor5" type="submit" value="Floor 5" class="wrap1-btn5" />
 </div>
+
+
+   <script>
+     const selected = document.querySelector(".selected");
+     const optionsContainer = document.querySelector(".options-container");
+     const searchBox = document.querySelector(".search-box input");
+
+     const optionsList = document.querySelectorAll(".option");
+     const hiddenid = document.querySelector (".selected-input");
+
+     selected.addEventListener("click", () => {
+       optionsContainer.classList.toggle("active");
+
+       searchBox.value = "";
+       filterList("");
+
+       if (optionsContainer.classList.contains("active")) {
+         searchBox.focus();
+       }
+     });
+
+     optionsList.forEach(o => {
+       o.addEventListener("click", () => {
+         selected.innerHTML = o.querySelector("label").innerHTML;
+         hiddenid.value = o.querySelector ("input").id
+         optionsContainer.classList.remove("active");
+       });
+     });
+
+     searchBox.addEventListener("keyup", function(e) {
+       filterList(e.target.value);
+     });
+
+     const filterList = searchTerm => {
+       searchTerm = searchTerm.toLowerCase();
+       optionsList.forEach(option => {
+         let label = option.firstElementChild.nextElementSibling.innerText.toLowerCase();
+         if (label.indexOf(searchTerm) != -1) {
+           option.style.display = "block";
+         } else {
+           option.style.display = "none";
+         }
+       });
+     };
+</script>

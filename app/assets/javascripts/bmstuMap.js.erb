@@ -55,7 +55,7 @@ function floor (etaz){
 	}
 	function show_result(data, flor){
 		var newsvg = document.createElementNS("http://www.w3.org/2000/svg","svg");
-		newsvg.className = "svg-btn2";
+		newsvg.setAttribute('class', "svg-btn2");
 		newsvg.setAttribute('viewBox', "0 0 1382.6667 974.66669");
 		data.forEach(function(rowData) {
 			var newpth = document.createElementNS("http://www.w3.org/2000/svg","path");
@@ -91,3 +91,25 @@ function floor (etaz){
 			 }
 		document.getElementById("floor").appendChild(newimg);
 	}
+	$('.wrap1-btn6').click(function() {
+	    const hiddenid = document.querySelector (".selected-input");
+	    const searchid = hiddenid.value
+
+	    $.ajax('/map/search.json', {
+	        method: 'POST',
+	        data: {rid: searchid}
+	    }).done(function (data) {
+					cleardata ("floor")
+					show_result (data["rooms"], data["floor"])
+					var newpth = document.createElementNS("http://www.w3.org/2000/svg","path");
+					newpth.setAttribute('d', data["room"]["coord"]);
+					newpth.setAttribute('fill', "#e50e0e");
+					newpth.setAttribute('class', "part2");
+					newpth.setAttribute('description-data', data["room"]["name"]);
+					newpth.addEventListener("mouseover", mouseinf);
+					newpth.addEventListener("mouseout", mouseoutf);
+					var parentNode = document.querySelector('.svg-btn2');
+					parentNode.appendChild(newpth);
+	    })
+
+	    });

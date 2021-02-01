@@ -1,8 +1,9 @@
+<div>
 <div class="container2">
       <div class="select-box">
         <div class="options-container">
         <% @allrooms.each do |i| %>
-        <div class="option">
+        <div class="option" id="0">
           <input type="radio" class="radio" id="<%=i.id%>" name="category" />
           <label><%=i.name%></label>
         </div>
@@ -16,7 +17,49 @@
           <input type="text" placeholder="Начните вводить номер..." />
         </div>
       </div>
-      <input name="Поиск" type="submit" value="Search" class="wrap1-btn6" />
+  </div>
+  <input name="Поиск" type="submit" value="Найти аудиторию" class="wrap1-btn6" />
+  </div>
+  <div>
+  <div class="container2">
+        <div class="select-box">
+          <div class="options-container">
+          <% @allrooms.each do |i| %>
+          <div class="option" id="1">
+            <input type="radio" class="radio" id="<%=i.id%>" name="category" />
+            <label><%=i.name%></label>
+          </div>
+          <% end %>
+          </div>
+          <div class="selected">
+            Пункт отправления
+          </div>
+          <input type="hidden" value="" class="selected-input"/>
+          <div class="search-box">
+            <input type="text" placeholder="Начните вводить номер..." />
+          </div>
+        </div>
+    </div>
+    <div class="container2">
+          <div class="select-box">
+            <div class="options-container">
+            <% @allrooms.each do |i| %>
+            <div class="option" id="2">
+              <input type="radio" class="radio" id="<%=i.id%>" name="category" />
+              <label><%=i.name%></label>
+            </div>
+            <% end %>
+            </div>
+            <div class="selected">
+              Пункт назначения
+            </div>
+            <input type="hidden" value="" class="selected-input"/>
+            <div class="search-box">
+              <input type="text" placeholder="Начните вводить номер..." />
+            </div>
+          </div>
+      </div>
+    <input name="Маршрут" type="submit" value="Проложить маршрту" class="wrap1-btn7" />
   </div>
 <div class="map">
   <div id="floor" class="floor">
@@ -36,35 +79,36 @@
 
 
    <script>
-     const selected = document.querySelector(".selected");
-     const optionsContainer = document.querySelector(".options-container");
-     const searchBox = document.querySelector(".search-box input");
+     const selected = document.querySelectorAll(".selected");
+     const optionsContainer = document.querySelectorAll(".options-container");
+     const searchBox = document.querySelectorAll(".search-box input");
 
      const optionsList = document.querySelectorAll(".option");
-     const hiddenid = document.querySelector (".selected-input");
+     const hiddenid = document.querySelectorAll (".selected-input");
+     for (let c=0; c<3; c++) {
+       selected[c].addEventListener("click", () => {
+         optionsContainer[c].classList.toggle("active");
 
-     selected.addEventListener("click", () => {
-       optionsContainer.classList.toggle("active");
+         searchBox[c].value = "";
+         filterList("");
 
-       searchBox.value = "";
-       filterList("");
-
-       if (optionsContainer.classList.contains("active")) {
-         searchBox.focus();
-       }
-     });
-
-     optionsList.forEach(o => {
-       o.addEventListener("click", () => {
-         selected.innerHTML = o.querySelector("label").innerHTML;
-         hiddenid.value = o.querySelector ("input").id
-         optionsContainer.classList.remove("active");
+         if (optionsContainer[c].classList.contains("active")) {
+           searchBox[c].focus();
+         }
        });
-     });
-
-     searchBox.addEventListener("keyup", function(e) {
-       filterList(e.target.value);
-     });
+       optionsList.forEach(
+       o => {if (c==o.id){
+         o.addEventListener("click", () => {
+           selected[c].innerHTML = o.querySelector("label").innerHTML;
+           hiddenid[c].value = o.querySelector ("input").id
+           optionsContainer[c].classList.remove("active");
+         });
+       }
+       });
+       searchBox[c].addEventListener("keyup", function(e) {
+         filterList(e.target.value);
+       });
+     }
 
      const filterList = searchTerm => {
        searchTerm = searchTerm.toLowerCase();

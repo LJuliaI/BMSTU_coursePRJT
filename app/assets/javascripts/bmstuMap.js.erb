@@ -35,8 +35,7 @@ function mouseoutf(){
 function cleardata(elementID){
 	document.getElementById(elementID).innerHTML = "";
 }
-
-function floor (etaz){
+  function floor (etaz){
 	var param_str = "?" +"etaz=" + etaz
 	var my_JSON_object = {};
 	var link = location.protocol + "//" + location.host + "/map/getdata.json"
@@ -113,3 +112,36 @@ function floor (etaz){
 	    })
 
 	    });
+			$('.wrap1-btn7').click(function() {
+					const hiddenid = document.querySelectorAll (".selected-input");
+					const startroom = hiddenid[1].value
+					const finishroom = hiddenid[2].value
+
+					$.ajax('/map/route.json', {
+							method: 'POST',
+							data: {sid: startroom, fid: finishroom}
+					}).done(function (data) {
+						floor_route(data)
+					})
+
+					});
+		async function floor_route(data){
+			cleardata ("floor")
+			floor(data[0]["floor"])
+			setTimeout(() => zone_show(data), 500);
+		}
+		function zone_show(data){
+			var currentfloor = data[0]["floor"]
+			while (currentfloor == (data[0]["floor"])){
+
+				var currentzone = data.shift()
+				var newpth = document.createElementNS("http://www.w3.org/2000/svg","path");
+				newpth.setAttribute('d', currentzone["coord"]);
+				newpth.setAttribute('fill', "#17cf1d");
+			  newpth.setAttribute('class', "part2");
+				// newpth.setAttribute('description-data', data["room"]["name"]);
+				console.log(currentzone);
+				var parentNode = document.querySelector('.svg-btn2');
+				parentNode.appendChild(newpth);
+			}
+		}

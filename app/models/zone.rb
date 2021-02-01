@@ -32,9 +32,4 @@ class Zone < ApplicationRecord
     end
     return finalez
   end
-
-  def self.resetzones
-    Zone.where(visited: true).each {|zone| zone.visited=false}
-    Zone.each {|zone| zone.mark = 1000000}
-  end
 end

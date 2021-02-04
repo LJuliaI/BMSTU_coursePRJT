@@ -121,27 +121,75 @@ function cleardata(elementID){
 							method: 'POST',
 							data: {sid: startroom, fid: finishroom}
 					}).done(function (data) {
+						var btn = document.querySelector('.wrap1-btn8');
+						btn.setAttribute('type', "submit");
+						btn.setAttribute ('lastfloor', data["zones"][data["zones"].length - 1]["floor"])
+						btn.setAttribute ('firstfloor', data["zones"][0]["floor"])
 						floor_route(data)
 					})
 
 					});
-		async function floor_route(data){
+			$('.wrap1-btn8').click(function() {
+						var btn = document.querySelector('.wrap1-btn8');
+						if (btn.getAttribute('value') == "Завершить") {
+							cleardata ("floor");
+							etaz = Number(btn.getAttribute ("lastfloor"));
+							floor(etaz);
+							btn.setAttribute('type', "hidden");
+							btn.setAttribute ('lastfloor', null);
+							btn.setAttribute('data', null);
+						} else {
+							zones = btn.getAttribute('data')
+							jzones = JSON.parse (zones)
+							floor_route(jzones);
+						}
+					});
+		function floor_route(data){
 			cleardata ("floor")
-			floor(data[0]["floor"])
+			floor(data["zones"][0]["floor"])
 			setTimeout(() => zone_show(data), 500);
 		}
 		function zone_show(data){
-			var currentfloor = data[0]["floor"]
-			while (currentfloor == (data[0]["floor"])){
-
-				var currentzone = data.shift()
+			var currentfloor = data["zones"][0]["floor"]
+			while (currentfloor == (data["zones"][0]["floor"])){
+				var currentzone = data["zones"].shift();
 				var newpth = document.createElementNS("http://www.w3.org/2000/svg","path");
 				newpth.setAttribute('d', currentzone["coord"]);
 				newpth.setAttribute('fill', "#17cf1d");
 			  newpth.setAttribute('class', "part2");
 				// newpth.setAttribute('description-data', data["room"]["name"]);
-				console.log(currentzone);
+				var parentNode = document.querySelector('.svg-btn2');
+				parentNode.appendChild(newpth);
+				if (data["zones"] == "") {break}
+			}
+			var btn = document.querySelector('.wrap1-btn8');
+			var firstfloor = Number(btn.getAttribute("firstfloor"))
+			var lastfloor = Number(btn.getAttribute("lastfloor"))
+			if (lastfloor == currentfloor) {
+				var newpth = document.createElementNS("http://www.w3.org/2000/svg","path");
+				newpth.setAttribute('d', data["froom"]["coord"]);
+				newpth.setAttribute('fill', "#e50e0e");
+				newpth.setAttribute('class', "part2");
+				newpth.setAttribute('description-data', data["froom"]["name"]);
+				newpth.addEventListener("mouseover", mouseinf);
+				newpth.addEventListener("mouseout", mouseoutf);
 				var parentNode = document.querySelector('.svg-btn2');
 				parentNode.appendChild(newpth);
 			}
+			if (firstfloor == currentfloor) {
+				var newpth = document.createElementNS("http://www.w3.org/2000/svg","path");
+				newpth.setAttribute('d', data["sroom"]["coord"]);
+				newpth.setAttribute('fill', "#e50e0e");
+				newpth.setAttribute('class', "part2");
+				newpth.setAttribute('description-data', data["sroom"]["name"]);
+				newpth.addEventListener("mouseover", mouseinf);
+				newpth.addEventListener("mouseout", mouseoutf);
+				var parentNode = document.querySelector('.svg-btn2');
+				parentNode.appendChild(newpth);
+			}
+			if (data["zones"] == ""){
+				btn.setAttribute('value', "Завершить");
+			}
+			btndata = JSON.stringify (data);
+			btn.setAttribute('data', btndata);
 		}

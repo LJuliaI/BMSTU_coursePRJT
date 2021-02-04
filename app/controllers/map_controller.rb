@@ -26,10 +26,12 @@ class MapController < ApplicationController
   def route()
     startzone = Room.find(params["sid"].to_i).zone
     finishzone = Room.find(params["fid"].to_i).zone
+    sroom = Room.find(params["sid"].to_i)
+    froom = Room.find(params["fid"].to_i)
     respond_to do |format|
       format.html
       format.json do render json:
-        Zone.routesearch(finishzone, startzone).as_json
+        {zones:Zone.routesearch(finishzone, startzone).as_json, sroom:sroom.as_json, froom:froom.as_json}
       end
     end
   end

@@ -14,7 +14,7 @@
     <input name="Floor4" type="submit" value="Floor 4" class="wrap1-btn4" />
     <input name="Floor5" type="submit" value="Floor 5" class="wrap1-btn5" />
 </div>
-<div>
+<div class="mp">
   <div class= jumbotron>
   <form action="/map" method="GET">
     <input type="text" name="search_name" >
@@ -25,7 +25,7 @@
 
    <form action="/map" method="GET">
      <label for="filter">Filter Options</label>
-  
+
      <% if session[:filter] == "floor" %>
        <select name="filter_option" onchange="this.form.submit()">
          <option value="Floor 0">Floor 0</option>

@@ -1,26 +1,32 @@
 $( document ).ready(function () {
 floor (2);
 $('.wrap1-btn0').click(function () {
+	hidebtn();
 	cleardata ("floor");
 	floor (0);
 });
 $('.wrap1-btn1').click(function () {
+	hidebtn();
 	cleardata ("floor");
 	floor (1);
 });
 $('.wrap1-btn2').click(function () {
+	hidebtn();
 	cleardata ("floor");
 	floor (2);
 });
 $('.wrap1-btn3').click(function () {
+	hidebtn();
 	cleardata ("floor");
 	floor (3);
 });
 $('.wrap1-btn4').click(function () {
+	hidebtn();
 	cleardata ("floor");
 	floor (4);
 });
 $('.wrap1-btn5').click(function () {
+	hidebtn();
 	cleardata ("floor");
 	floor (5);
 });
@@ -93,7 +99,7 @@ function cleardata(elementID){
 	$('.wrap1-btn6').click(function() {
 	    const hiddenid = document.querySelector (".selected-input");
 	    const searchid = hiddenid.value
-
+			hidebtn();
 	    $.ajax('/map/search.json', {
 	        method: 'POST',
 	        data: {rid: searchid}
@@ -116,7 +122,7 @@ function cleardata(elementID){
 					const hiddenid = document.querySelectorAll (".selected-input");
 					const startroom = hiddenid[1].value
 					const finishroom = hiddenid[2].value
-
+					hidebtn();
 					$.ajax('/map/route.json', {
 							method: 'POST',
 							data: {sid: startroom, fid: finishroom}
@@ -135,10 +141,7 @@ function cleardata(elementID){
 							cleardata ("floor");
 							etaz = Number(btn.getAttribute ("lastfloor"));
 							floor(etaz);
-							btn.setAttribute('type', "hidden");
-							btn.setAttribute('value', "Далее");
-							btn.setAttribute ('lastfloor', null);
-							btn.setAttribute('data', null);
+							hidebtn();
 						} else {
 							zones = btn.getAttribute('data')
 							jzones = JSON.parse (zones)
@@ -193,4 +196,11 @@ function cleardata(elementID){
 			}
 			btndata = JSON.stringify (data);
 			btn.setAttribute('data', btndata);
+		}
+		function hidebtn() {
+			var btn = document.querySelector('.wrap1-btn8');
+			btn.setAttribute('type', "hidden");
+			btn.setAttribute('value', "Далее");
+			btn.setAttribute ('lastfloor', null);
+			btn.setAttribute('data', null);
 		}

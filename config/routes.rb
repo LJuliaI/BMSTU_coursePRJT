@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'help'    => 'static_pages#help'
   get 'about'   => 'static_pages#about'
   get 'map' => 'map#bmstuMap'
+  get 'contact' => 'static_pages#contact'
   get 'map/getdata'
   post 'map/search'
   post 'map/route'

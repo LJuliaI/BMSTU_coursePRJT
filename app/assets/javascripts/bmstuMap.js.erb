@@ -1,6 +1,6 @@
 $( document ).ready(function () {
 floor (2);
-$('.wrap1-btn0').click(function () {
+$('.wrap1-btn0').click(function () {  //swithing between floors on button click
 	hidebtn();
 	cleardata ("floor");
 	floor (0);
@@ -31,17 +31,17 @@ $('.wrap1-btn5').click(function () {
 	floor (5);
 });
 });
-function mouseinf(){
+function mouseinf(){                                                  //adding pop-up of additional data on mouse hover
 		$('.description').html($(this).attr('description-data'));
 		$('.description').fadeIn(5);
 }
-function mouseoutf(){
+function mouseoutf(){																								//removing data if mouse stops hovering
 		$('.description').fadeOut(5);
 }
-function cleardata(elementID){
+function cleardata(elementID){																			//clears all elements with inserted id
 	document.getElementById(elementID).innerHTML = "";
 }
-  function floor (etaz){
+  function floor (etaz){																						//sends AJAX reqest for all rooms on a floor
 	var param_str = "?" +"etaz=" + etaz
 	var my_JSON_object = {};
 	var link = location.protocol + "//" + location.host + "/map/getdata.json"
@@ -58,8 +58,8 @@ function cleardata(elementID){
 		http_request.send(null);
 		return false;
 	}
-	function show_result(data, flor){
-		var newsvg = document.createElementNS("http://www.w3.org/2000/svg","svg");
+	function show_result(data, flor){																				//Adds all elements for rooms demonstration on document
+		var newsvg = document.createElementNS("http://www.w3.org/2000/svg","svg"); //Enables svg graphics
 		newsvg.setAttribute('class', "svg-btn2");
 		newsvg.setAttribute('viewBox', "0 0 1382.6667 974.66669");
 		data.forEach(function(rowData) {
@@ -74,7 +74,7 @@ function cleardata(elementID){
 		});
 		document.getElementById("floor").appendChild(newsvg);
 		var newimg = document.createElement("img");
-		switch (flor) {
+		switch (flor) {																										//Adds floor blueprint
 			case 0:
 				newimg.setAttribute('src', "/images/bmstu0floor.jpg");
 				break;
@@ -96,17 +96,17 @@ function cleardata(elementID){
 			 }
 		document.getElementById("floor").appendChild(newimg);
 	}
-	$('.wrap1-btn6').click(function() {
+	$('.wrap1-btn6').click(function() {																						//Searches for the room
 	    const hiddenid = document.querySelector (".selected-input");
 	    const searchid = hiddenid.value
 			hidebtn();
-	    $.ajax('/map/search.json', {
+	    $.ajax('/map/search.json', {																							//AJAX request for the room
 	        method: 'POST',
 	        data: {rid: searchid}
 	    }).done(function (data) {
-					cleardata ("floor")
-					show_result (data["rooms"], data["floor"])
-					var newpth = document.createElementNS("http://www.w3.org/2000/svg","path");
+					cleardata ("floor")																										//clears current floor
+					show_result (data["rooms"], data["floor"]) 														//shows the floor of the searched room
+					var newpth = document.createElementNS("http://www.w3.org/2000/svg","path");  //shows searched room with different color
 					newpth.setAttribute('d', data["room"]["coord"]);
 					newpth.setAttribute('fill', "#e50e0e");
 					newpth.setAttribute('class', "part2");
@@ -118,24 +118,24 @@ function cleardata(elementID){
 	    })
 
 	    });
-			$('.wrap1-btn7').click(function() {
+			$('.wrap1-btn7').click(function() {																				//buildin route between rooms
 					const hiddenid = document.querySelectorAll (".selected-input");
 					const startroom = hiddenid[1].value
 					const finishroom = hiddenid[2].value
 					hidebtn();
-					$.ajax('/map/route.json', {
+					$.ajax('/map/route.json', {																						//AJAX request for route building
 							method: 'POST',
 							data: {sid: startroom, fid: finishroom}
 					}).done(function (data) {
-						var btn = document.querySelector('.wrap1-btn8');
+						var btn = document.querySelector('.wrap1-btn8');										//enables button for following route
 						btn.setAttribute('type', "submit");
 						btn.setAttribute ('lastfloor', data["zones"][data["zones"].length - 1]["floor"])
 						btn.setAttribute ('firstfloor', data["zones"][0]["floor"])
-						floor_route(data)
+						floor_route(data)																										//shows part of the route on a one floor
 					})
 
 					});
-			$('.wrap1-btn8').click(function() {
+			$('.wrap1-btn8').click(function() {																				//Continues route display on the next floor or end route display if this floor is last
 						var btn = document.querySelector('.wrap1-btn8');
 						if (btn.getAttribute('value') == "Завершить") {
 							cleardata ("floor");
@@ -148,14 +148,14 @@ function cleardata(elementID){
 							floor_route(jzones);
 						}
 					});
-		function floor_route(data){
+		function floor_route(data){																									//selects zones for this floor
 			cleardata ("floor")
 			floor(data["zones"][0]["floor"])
-			setTimeout(() => zone_show(data), 500);
+			setTimeout(() => zone_show(data), 500);																		//shows selected zones
 		}
 		function zone_show(data){
 			var currentfloor = data["zones"][0]["floor"]
-			while (currentfloor == (data["zones"][0]["floor"])){
+			while (currentfloor == (data["zones"][0]["floor"])){											//Shows all selected zones
 				var currentzone = data["zones"].shift();
 				var newpth = document.createElementNS("http://www.w3.org/2000/svg","path");
 				newpth.setAttribute('d', currentzone["coord"]);
@@ -169,7 +169,7 @@ function cleardata(elementID){
 			var btn = document.querySelector('.wrap1-btn8');
 			var firstfloor = Number(btn.getAttribute("firstfloor"))
 			var lastfloor = Number(btn.getAttribute("lastfloor"))
-			if (lastfloor == currentfloor) {
+			if (lastfloor == currentfloor) {																					//Displays the final room if it is the correct floor
 				var newpth = document.createElementNS("http://www.w3.org/2000/svg","path");
 				newpth.setAttribute('d', data["froom"]["coord"]);
 				newpth.setAttribute('fill', "#e50e0e");
@@ -180,7 +180,7 @@ function cleardata(elementID){
 				var parentNode = document.querySelector('.svg-btn2');
 				parentNode.appendChild(newpth);
 			}
-			if (firstfloor == currentfloor) {
+			if (firstfloor == currentfloor) {																						//Displays the first room if it is the first floor
 				var newpth = document.createElementNS("http://www.w3.org/2000/svg","path");
 				newpth.setAttribute('d', data["sroom"]["coord"]);
 				newpth.setAttribute('fill', "#e50e0e");
@@ -191,13 +191,13 @@ function cleardata(elementID){
 				var parentNode = document.querySelector('.svg-btn2');
 				parentNode.appendChild(newpth);
 			}
-			if (data["zones"] == ""){
+			if (data["zones"] == ""){																										//Sets button for route completion if there are no more zones in sent data
 				btn.setAttribute('value', "Завершить");
 			}
 			btndata = JSON.stringify (data);
 			btn.setAttribute('data', btndata);
 		}
-		function hidebtn() {
+		function hidebtn() {																													//hides button after route completion
 			var btn = document.querySelector('.wrap1-btn8');
 			btn.setAttribute('type', "hidden");
 			btn.setAttribute('value', "Далее");

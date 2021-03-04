@@ -2,13 +2,24 @@ require 'test_helper'
 
 class StaticPagesControllerTest < ActionDispatch::IntegrationTest
   test "should get home" do
-    get static_pages_home_url
+    get root_path
     assert_response :success
+    assert_select "title", "BMSTU GUIDE"
   end
 
   test "should get help" do
-    get static_pages_help_url
+    get help_path
     assert_response :success
+    assert_select "title", "Help | BMSTU GUIDE"
   end
-
+test "should get map" do
+  get map_path
+  assert_response :success
+  assert_select "title", "BMSTU GUIDE"
+end
+test "should get contact" do
+    get contact_path
+    assert_response :success
+    assert_select "title", "Contact | BMSTU GUIDE"
+  end
 end
